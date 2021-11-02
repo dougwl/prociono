@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Fontship
     steps:
-      - name: Create Fonts
-        run: fontship make variable-woff2
-      - name: Create Package
-        run: fontship make dist
-      - name: Fontship
+      - name: Fontship make variable-woff2
+        id: fontship
         uses: theleagueof/fontship@v0.8.2
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.fontship.outputs.DISTDIR }}
+          path: ${{ steps.fontship.outputs.DISTDIR }}.zip
