@@ -1,0 +1,15 @@
+name: Fontship
+on:
+  issues:
+    types: [opened]
+jobs:
+  fontship:
+    runs-on: ubuntu-latest
+    name: Fontship
+    steps:
+      - name: Create Fonts
+        run: fontship make variable-woff2
+      - name: Create Package
+        run: fontship make dist
+      - name: Fontship
+        uses: theleagueof/fontship@v0.8.2
